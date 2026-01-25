@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Login</title>
+ <link rel="stylesheet" href="style.css">
+</style>
+</head>
+<body>
+
+  <h2>Login</h2>
+
+  <form>
+<div>
+        <input type="email" placeholder="Email" required>
+</div>
+<div>
+    <input type="password" placeholder="password" required>
+</div>
+  </form>
+
+<button 
+class="add-btn" onclick="login()">Login</button>
+
+
+  <p>New user? <a href="register.html">Register here</a></p>
+  
+  <script>
+/* --go on role based dashboard --*/
+function login() {
+  let username = document.getElementById("username").value;
+  let role = document.getElementById("role").value;
+
+  if (username === "" || role === "") {
+    alert("Fill all fields");
+    return;
+  }
+
+  sessionStorage.setItem("isLoggedIn", "true");
+  sessionStorage.setItem("userName", username);
+  sessionStorage.setItem("role", role);
+
+  if (role === "admin") {
+    window.location.href = "";
+  } 
+  else if (role === "superintendent") {
+    window.location.href = "";
+  } 
+  else if (role === "invigilator") {
+    window.location.href = "";
+  }
+}
+</script>
+</body>
+</body>
+</html>

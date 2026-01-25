@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PU Proctors Diary</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- =================  HOME ================= -->
+  <div id="page1" class="page active">
+    <header>
+      <h1>Welcome to PU Proctors Diary</h1>
+      <p>Manage exam duties, attendance, reports, leaves and payments all in one place</p>
+      <div class="btn-group">
+         <button onclick="location.href='login.html'">Login</button>
+  <button onclick="location.href='register.html'">Register</button>
+      </div>
+    </header>
+
+    <div class="container">
+      <div class="features">
+        <div class="card">
+          <img src="calender.jpeg">
+          <h3>Duty Assignment</h3>
+          <p>Admins assign exam duties based on availability and center preferences.</p>
+        </div>
+
+        <div class="card">
+          <img src="tick.jpeg">
+          <h3>Attendance & Reports</h3>
+          <p>Invigilators mark attendance and supervisors upload daily reports.</p>
+        </div>
+
+        <div class="card">
+          <img src="money.jpeg">
+          <h3>Payments</h3>
+          <p>Verified duties automatically generate payment summaries.</p>
+        </div>
+      
+        <div class="card">
+          <img src="leave.jpeg">
+          <h3>Leave & Availability</h3>
+          <p>Staff can apply for leaves or update availability to avoid unwanted assignments.</p>
+        </div>
+
+        <div class="card">
+          <img src="dashboard.jpeg">
+          <h3>Role-Based Dashboards</h3>
+          <p>Each user gets a tailored dashboard for focused operations.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+ 
+
+  <!-- ================= COMMON JAVASCRIPT ================= -->
+  <script>
+    function showPage(pageNo) {
+      document.getElementById('page1').classList.remove('active');
+      document.getElementById('page2').classList.remove('active');
+
+      document.getElementById('page' + pageNo).classList.add('active');
+    }
+
+    // Example: switch page after 3 seconds (demo purpose)
+    // setTimeout(() => showPage(2), 3000);
+  </script>
+
+</body>
+</html>
