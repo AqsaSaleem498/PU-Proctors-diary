@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Admin dashboard</title>
+<style>
+    * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+body {
+    background-color: #f2f4f7;
+}
+.navbar {
+  background: black;
+  padding: 12px;
+  color: white;
+}
+
+.navbar a {
+  color: #ccc;
+  margin: 0 10px;
+  text-decoration: none;
+}
+
+.navbar a.active {
+  color: white;
+  font-weight: bold;
+}
+
+.logo {
+  font-weight: bold;
+}
+
+.right {
+  float: right;
+}
+
+
+.title {
+    margin-bottom: 30px;
+}
+
+.cards {
+    display: flex;
+    gap: 20px;
+    margin-bottom: 30px;
+    height: 100px;
+    justify-content: space-between;
+    
+}
+.boxes {
+    display: flex;
+    gap: 20px;
+    margin-bottom: 30px;
+    height: 50px;
+   
+}
+
+
+.card {
+    flex: 1;
+    color: #ffffff;
+    padding: 25px;
+    border-radius: 3px;
+    text-align: center;
+   
+   
+}
+
+.card h3 {
+    font-size: 15px;
+    margin-bottom: 5px;
+}
+
+.card p {
+    font-size: 28px;
+    font-weight: bold;
+}
+
+/* Colors */
+.blue { background-color: #1e73ff; }
+.green { background-color: #1e8e5a; }
+.cyan { background-color: #17c0eb; }
+.yellow { background-color: #f1b400; }
+
+/* Analytics section */
+.analytics {
+    display: flex;
+    gap: 20px;
+    border-color: #1e8e5a;
+}
+
+.box {
+    background: white;
+    flex: 1;
+    padding: 20px;
+    border-radius: 8px;
+    text-align: center;
+    box-shadow: 0 0 8px rgba(0,0,0,0.08);
+    
+}
+
+.box h4 {
+    margin-bottom: 10px;
+    font-size: 15px;
+    height: 10px;
+}
+
+.box p {
+    font-size: 18px;
+    color: #333;
+}</style>
+</head>
+<body>
+    <div class="navbar">
+        <span class="logo">Proctors Diary</span>
+        <a class="active" href="A-Dashboard.html">Dashboard</a>
+        <a href="A-manage centers.html">Manage Center</a>
+        <a href="A-leave request.html">Leave Request</a>
+        <a href="A-Manage Duties.html">Assign Duties</a>
+        <a href="A-attendance.html">Verify Attendance</a>
+        <a href="A-payments.html">Payments</a>
+        <a href="A-view Reports.html">View Reports</a>
+        <span class="right">Logged in as admin | Logout</span>
+    </div>
+
+    
+     <h2>Admin Dashboard</h2>
+    
+    
+     <div class="boxes">
+
+        <div class="card blue">
+            <h5>Assign Duties</h5>
+        </div>
+
+        <div class="card green">
+            <h5>Verify Attendance</h5>
+        </div>
+
+        <div class="card cyan">
+            <h5>Views Reports</h5>
+        </div>
+
+        <div class="card yellow">
+            <h5>Payments</h5>
+        </div>
+
+    </div>
+
+    
+     <div class="cards">
+
+        <div class="card blue">
+            <h3>Total User</h3>
+            <p id="users">0</p>
+        </div>
+
+        <div class="card green">
+            <h3>Total Duties</h3>
+            <p id="duties">0</p>
+        </div>
+
+        <div class="card cyan">
+            <h3>Reports Uploaded</h3>
+            <p id="reports">0</p>
+        </div>
+
+        <div class="card yellow">
+            <h3>Payments Made</h3>
+            <p id="payments">0</p>
+        </div>
+
+    </div>
+    <h4>Analytics & Reporting</h4>
+    <br>
+
+    <div class="analytics">
+
+        <div class="box">
+            <h4>Attendance Rate </h4>
+            <p>0%</p>
+        </div>
+
+        <div class="box">
+            <h4>Report Submission Rate</h4>
+            <p>0%</p>
+        </div>
+
+        <div class="box">
+            <h4>Total Amount Paid</h4>
+            <p>Rs. 0.00</p>
+        </div>
+
+    </div>
+  </div>  
+<script src="script.js">
+// Simple example data
+document.getElementById("users").innerText = 3;
+document.getElementById("duties").innerText = 0;
+document.getElementById("reports").innerText = 0;
+document.getElementById("payments").innerText = 0;
+/*-- go on admin dashboard --*/
+document.getElementById("adminName").innerText =
+  "Welcome " + sessionStorage.getItem("userName");
+
+  
+function logout() {
+  sessionStorage.clear();
+  window.location.href = "login.html";
+}
+</script>
+</body>
+</html>
