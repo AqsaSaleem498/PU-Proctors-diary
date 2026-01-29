@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Manage Centers</title>
+<link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+<div class="navbar">
+    <span class="logo">Proctors Diary</span>
+    <a href="A-Dashboard.html">Dashboard</a>
+    <a class="active" href="A-manage centers.html">Manage Center</a>
+    <a href="A-leave request.html">Leave Request</a>
+    <a href="A-Manage Duties.html">Assign Duties</a>
+    <a href="A-attendance.html">Verify Attendance</a>
+    <a href="A-payments.html">Payments</a>
+    <a href="A-view Reports.html">View Reports</a>
+    <span class="right">Logged in as admin | Logout</span>
+</div>
+
+<h2>Manage Centers</h2>
+
+<!-- ===== SEARCH (WITH LIST) ===== -->
+<div class="search-box">
+    <input type="text" id="search" list="centerList" placeholder="Search by name, city or code">
+    <datalist id="centerList"></datalist>
+    <button onclick="searchCenter()">Search</button>
+</div>
+
+<!-- ===== FORM (HORIZONTAL) ===== -->
+<div class="form-box">
+    <h3>Add New Center</h3>
+
+    <div class="form-row">
+        <input type="text" id="code" placeholder="Center Code">
+        <input type="text" id="name" placeholder="Center Name">
+        <input type="text" id="city" placeholder="City">
+        <input type="text" id="address" placeholder="Address">
+    </div>
+
+    <div class="form-row">
+        <input type="text" id="contact" placeholder="Contact Person">
+        <input type="text" id="phone" placeholder="Phone">
+        <input type="number" id="capacity" placeholder="Capacity">
+        <button class="add-btn" onclick="addCenter()">Add Center</button>
+    </div>
+</div>
+
+<!-- ===== TABLE ===== -->
+<table id="centerTable">
+    <tr>
+        <th>#</th>
+        <th>Code</th>
+        <th>Name</th>
+        <th>City</th>
+        <th>Address</th>
+        <th>Contact</th>
+        <th>Phone</th>
+        <th>Capacity</th>
+        <th>Action</th>
+    </tr>
+</table>
+
+<script>
+let count = 1;
+
+function addCenter(){
+    let code = document.getElementById("code").value;
+    let name = document.getElementById("name").value;
+    let city = document.getElementById("city").value;
+    let address = document.getElementById("address").value;
+    let contact = document.getElementById("contact").value;
+    let phone = document.getElementById("phone").value;
+    let capacity = document.getElementById("capacity").value;
+
+    if(code=="" || name==""){
+        alert("Code and Name required");
+        return;
+    }
+
+    let table = document.getElementById("centerTable");
+    let row = table.insertRow();
+
+    row.innerHTML = `
+        <td>${count++}</td>
+        <td>${code}</td>
+        <td>${name}</td>
+        <td>${city}</td>
+        <td>${address}</td>
+        <td>${contact}</td>
+        <td>${phone}</td>
+        <td>${capacity}</td>
+        <td><button class="delete-btn" onclick="this.parentElement.parentElement.remove()">Delete</button></td>
+    `;
+
+    updateCenterList();   // ✅ ADDED (list update)
+
+    document.querySelectorAll("input").forEach(i => i.value="");
+}
+
+function searchCenter(){
+    let filter = document.getElementById("search").value.toLowerCase();
+    let rows = document.querySelectorAll("#centerTable tr");
+
+    rows.forEach((row, index)=>{
+        if(index === 0) return;
+        row.style.display = row.innerText.toLowerCase().includes(filter) ? "" : "none";
+    });
+}
+
+/* ===== LIST FUNCTION (NEW) ===== */
+function updateCenterList(){
+    let list = document.getElementById("centerList");
+    list.innerHTML = "";
+
+    let rows = document.querySelectorAll("#centerTable tr");
+
+    rows.forEach((row, index) => {
+        if(index === 0) return;
+
+        let code = row.cells[1].innerText;
+        let name = row.cells[2].innerText;
+        let city = row.cells[3].innerText;
+
+        let option = document.createElement("option");
+        option.value = code + " - " + name + " (" + city + ")";
+        list.appendChild(option);
+    });
+}
+</script>
+
+</body>
+</html>
