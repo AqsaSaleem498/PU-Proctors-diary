@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Manage Leave Requests</title>
+   <link rel="stylesheet" href="style.css">
+</head>
+<body>
+   <div class="navbar">
+        <span class="logo">Proctors Diary</span>
+        <a href="A-Dashboard.html">Dashboard</a>
+        <a href="A-manage centers.html">Manage Center</a>
+        <a class="active"href="A-leave request.html">Leave Request</a>
+        <a href="A-Manage Duties.html">Assign Duties</a>
+        <a href="A-attendance.html">Verify Attendance</a>
+        <a href="A-payments.html">Payments</a>
+        <a href="A-view Reports.html">View Reports</a>
+        <span class="right">Logged in as admin | Logout</span>
+    </div>
+
+<!-- Page Content -->
+    <h2>Manage Leave Requests</h2>
+<br>
+    <table>
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>User</th>
+                <th>Role</th>
+                <th>From</th>
+                <th>To</th>
+                <th>Reason</th>
+                <th>Status</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody id="leaveTableBody">
+            <tr td="noDataRow">
+                <td colspan="8" align="center">No Leave Request found
+                </td>
+            </tr>
+            <!--Rows JS se aye gy-->
+        </tbody>
+    </table>
+</div>
+
+
+<script>
+    const tbody = document.getElementById("leaveTableBody");
+const noDataRow = document.getElementById("noDataRow");
+
+// future me jab leave request aye (PHP / backend se)
+function addLeaveRequest(data) {
+
+  // empty-state row hatao
+  if (noDataRow) {
+    noDataRow.remove();
+  }
+
+  const tr = document.createElement("tr");
+
+  tr.innerHTML = `
+    <td>${tbody.children.length + 1}</td>
+    <td>${data.user}</td>
+    <td>${data.role}</td>
+    <td>${data.from}</td>
+    <td>${data.to}</td>
+    <td>${data.reason}</td>
+    <td class="status">Pending</td>
+    <td>
+      <button class="approve-btn">Approve</button>
+      <button class="reject-btn">Reject</button>
+    </td>
+  `;
+
+  tbody.appendChild(tr);
+}
+
+// approve / reject UI behavior
+tbody.addEventListener("click", function (e) {
+  if (e.target.classList.contains("approve-btn")) {
+    e.target.closest("tr").querySelector(".status").innerText = "Approved";
+  }
+
+  if (e.target.classList.contains("reject-btn")) {
+    e.target.closest("tr").querySelector(".status").innerText = "Rejected";
+  }
+});
+console.log("Manage Leave Requests page loaded");
+</script>
+</body>
+</html>
