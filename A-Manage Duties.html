@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Manage Duties</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="navbar">
+        <span class="logo">Proctors Diary</span>
+        <a href="A-Dashboard.html">Dashboard</a>
+        <a href="A-manage centers.html">Manage Center</a>
+        <a href="A-leave request.html">Leave Request</a>
+        <a class="active" href="A-Manage Duties.html">Assign Duties</a>
+        <a href="A-attendance.html">Verify Attendance</a>
+        <a href="A-payments.html">Payments</a>
+        <a href="A-view Reports.html">View Reports</a>
+        <span class="right">Logged in as admin | Logout</span>
+    </div>
+    <h2>Manage Duties</h2>
+
+    
+        <div class="form-row">
+            <div class="form-group">
+                <label>Duty Role</label>
+                <select id="role">
+                    <option>Select</option>
+                    <option>Supervisor</option>
+                    <option>Invigilator</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label>Select User</label>
+                <select id="user">
+                    <option>Select</option>
+                    <option>Ali</option>
+                    <option>Ahmed</option>
+                    <option>Fatima</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label>Exam Date</label>
+                <input type="date" id="date">
+            </div>
+
+            <div class="form-group">
+                <label>Shift</label>
+                <select id="shift">
+                    <option>Morning</option>
+                    <option>Evening</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="form-row">
+            <div class="form-group">
+                <label>Center</label>
+                <select id="center">
+                    <option>Select</option>
+                    <option>Center A</option>
+                    <option>Center B</option>
+                </select>
+            </div>
+
+            <div>
+                <button class="add-btn"
+                onclick="assignDuty()">Assign</button>
+            </div>
+        </div>
+    </div>
+</form>
+    <table>
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>User</th>
+                <th>Role</th>
+                <th>Date</th>
+                <th>Shift</th>
+                <th>Center</th>
+                <th>Status</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+
+        <tbody id="tableBody">
+        </tbody>
+    </table>
+
+    <script>
+        let count = 1;
+
+        function assignDuty() {
+
+            let role = document.getElementById("role").value;
+            let user = document.getElementById("user").value;
+            let date = document.getElementById("date").value;
+            let shift = document.getElementById("shift").value;
+            let center = document.getElementById("center").value;
+
+
+            if (role === "Select" || user === "Select" || center === "Select" || date === "") {
+                alert("Please fill all fields");
+                return;
+            }
+
+            let table = document.getElementById("tableBody");
+
+            let row = table.insertRow();
+            row.insertCell(0).innerText = count++;
+            row.insertCell(1).innerText = user;
+            row.insertCell(2).innerText = role;
+            row.insertCell(3).innerText = date;
+            row.insertCell(4).innerText = shift;
+            row.insertCell(5).innerText = center;
+            row.insertCell(6).innerHTML = "<span class='status'>Assigned</span>";
+            row.insertCell(7).innerHTML =
+                "<button onclick='deleteRow(this)' style='background:red;color:white;border:none;padding:5px 10px;cursor:pointer;'>Delete</button>";
+        }
+        function deleteRow(btn) {
+            let row = btn.parentNode.parentNode;
+            row.remove();
+        }
+    </script>
+
+</body>
+
+</html>
