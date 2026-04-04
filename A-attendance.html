@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Attendance Records (Admin)</title>
+     <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+     <div class="navbar">
+        <span class="logo">Proctors Diary</span>
+        <a href="A-Dashboard.html">Dashboard</a>
+        <a href="A-manage centers.html">Manage Center</a>
+        <a href="A-leave request.html">Leave Request</a>
+        <a href="A-Manage Duties.html">Assign Duties</a>
+        <a class="active" href="A-attendance.html">Verify Attendance</a>
+        <a href="A-payments.html">Payments</a>
+        <a href="A-view Reports.html">View Reports</a>
+        <span class="right">Logged in as admin | Logout</span>
+    </div>
+        <h2>Attendance Records</h2>
+
+        <div class="filter">
+            Filter:
+            <select>
+                <option>All</option>
+                <option>Present</option>
+                <option>Absent</option>
+            </select>
+        </div>
+
+        <table>
+            <tr>
+                <th>#</th>
+                <th>User</th>
+                <th>Role</th>
+                <th>Date</th>
+                <th>Shift</th>
+                <th>Center</th>
+                <th>Check In</th>
+                <th>Status</th>
+                <th>Update</th>
+            </tr>
+
+            <tr>
+                <td colspan="9" class="empty">
+                    No attendance records found
+                </td>
+            </tr>
+        </table>
+    </div>
+</div>
+</body>
+
+</html>
