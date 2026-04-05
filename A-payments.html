@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Payments</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="navbar">
+        <span class="logo">Proctors Diary</span>
+        <a href="A-Dashboard.html">Dashboard</a>
+        <a href="A-manage centers.html">Manage Center</a>
+        <a href="A-leave request.html">Leave Request</a>
+        <a href="A-Manage Duties.html">Assign Duties</a>
+        <a href="A-attendance.html">Verify Attendance</a>
+        <a class="active" href="A-payments.html">Payments</a>
+        <a href="A-view Reports.html">View Reports</a>
+        <span class="right">Logged in as admin | Logout</span>
+    </div>
+
+    <div class="rates">
+        <label>Invigilator Rate (Rs.)</label>
+        <input type="number" id="invRate" value="500">
+
+        <label>Superintendent Rate (Rs.)</label>
+        <input type="number" id="supRate" value="700">
+
+        <button class="add-btn"
+        
+        onclick="updateRates()">Update Rates</button>
+    </div>
+
+    <h2>Payments</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>User</th>
+                <th>Total Amount</th>
+                <th>Status</th>
+                <th>Payment Date</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+
+        <tbody>
+             <tbody id="paymentTable">
+    <!-- Dynamic rows JS se ayengi -->
+             </tbody>   
+    </table>
+</div>
+
+
+<script src="payments.js">// Ye data normally backend (PHP + DB) se aye ga
+let attendanceData = [
+  {
+    name: "Ali Khan",
+    role: "Invigilator",
+    duties: 3,
+    attendanceMarked: true
+  },
+  {
+    name: "Sara Ahmed",
+    role: "Superintendent",
+    duties: 0,
+    attendanceMarked: false
+  }
+];
+
+// Rates
+const rate = {
+  Invigilator: 2000,
+  Superintendent: 3000
+};
+
+let table = document.getElementById("paymentTable");
+
+attendanceData.forEach(user => {
+
+  // ❗ Sirf wo users jin ki attendance marked ho
+  if (user.attendanceMarked && user.duties > 0) {
+
+    let total = user.duties * rate[user.role];
+
+    let row = `
+      <tr>
+        <td>${user.name}</td>
+        <td>${user.role}</td>
+        <td>${user.duties}</td>
+        <td>${rate[user.role]}</td>
+        <td>${total}</td>
+        <td>Pending</td>
+ <td> <button onclick="markPaid(this)">Mark as Paid</button></td>          
+ </tr>
+    `;
+
+    table.innerHTML += row;
+  }
+});
+
+    function markPaid(btn) {
+    let row = btn.parentElement.parentElement;
+    let statusCell = row.cells[3];
+
+    statusCell.innerText = "Paid";
+    statusCell.className = "paid";
+
+    btn.disabled = true;
+    btn.innerText = "Paid";
+}
+
+function updateRates() {
+    alert("Rates updated successfully (frontend only)");
+}
+</script>
+</body>
+</html>
