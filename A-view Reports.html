@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Superintendent Reports (Admin Review)</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="navbar">
+        <span class="logo">Proctors Diary</span>
+        <a href="A-Dashboard.html">Dashboard</a>
+        <a href="A-manage centers.html">Manage Center</a>
+        <a href="A-leave request.html">Leave Request</a>
+        <a href="A-Manage Duties.html">Assign Duties</a>
+        <a href="A-attendance.html">Verify Attendance</a>
+        <a href="A-payments.html">Payments</a>
+        <a class="active" href="A-view Reports.html">View Reports</a>
+        <span class="right">Logged in as admin | Logout</span>
+    </div>
+
+        <h2>Superintendent Reports (Admin Review)</h2>
+
+        <!-- Filters -->
+        <div class="filters">
+            <div>
+                <label>Status</label><br>
+                <select id="status">
+                    <option>All</option>
+                    <option>Pending</option>
+                    <option>Approved</option>
+                    <option>Rejected</option>
+                </select>
+            </div>
+
+            <div>
+                <label>From (Exam Date)</label><br>
+                <input type="date">
+            </div>
+
+            <div>
+                <label>To (Exam Date)</label><br>
+                <input type="date">
+            </div>
+
+            <button onclick="applyFilters()">Apply Filters</button>
+        </div>
+
+        <!-- Table -->
+        <table>
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Superintendent</th>
+                    <th>Duty</th>
+                    <th>Center</th>
+                    <th>File</th>
+                    <th>Uploaded</th>
+                    <th>Status</th>
+                    <th>Review</th>
+                </tr>
+            </thead>
+
+            <tbody id="tableBody">
+                <tr>
+                    <td colspan="8" class="no-data">No reports found.</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <script>
+        function applyFilters() {
+            alert("Filters applied (Demo)");
+        }
+    </script>
+
+</body>
+
+</html>
