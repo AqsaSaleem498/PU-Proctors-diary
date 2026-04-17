@@ -57,7 +57,6 @@ body {
     gap: 20px;
     margin-bottom: 30px;
     height: 50px;
-   
 }
 
 
@@ -97,7 +96,7 @@ body {
 .box {
     background: white;
     flex: 1;
-    padding: 20px;
+    padding: 30px;
     border-radius: 8px;
     text-align: center;
     box-shadow: 0 0 8px rgba(0,0,0,0.08);
@@ -157,22 +156,22 @@ body {
 
         <div class="card blue">
             <h3>Total User</h3>
-            <p id="users">0</p>
+            <p id="users"><?php echo $totalUsers; ?></p>
         </div>
 
         <div class="card green">
             <h3>Total Duties</h3>
-            <p id="duties">0</p>
+            <p id="duties"><?php echo $totalDuties; ?></p>
         </div>
 
         <div class="card cyan">
             <h3>Reports Uploaded</h3>
-            <p id="reports">0</p>
+            <p id="reports"><?php echo $totalReports; ?></p>
         </div>
 
         <div class="card yellow">
             <h3>Payments Made</h3>
-            <p id="payments">0</p>
+            <p id="payments"><?php echo $totalPayments; ?></p>
         </div>
 
     </div>
@@ -183,17 +182,21 @@ body {
 
         <div class="box">
             <h4>Attendance Rate </h4>
-            <p>0%</p>
+            <p><?php echo $attendanceRate; ?></p>
         </div>
 
         <div class="box">
             <h4>Report Submission Rate</h4>
-            <p>0%</p>
+            <p><?php echo $reportSubmissionRate; ?></p>
         </div>
 
         <div class="box">
             <h4>Total Amount Paid</h4>
-            <p>Rs. 0.00</p>
+            <p><?php echo $totalAmountPaid; ?></p>
+        </div>
+        <div class="box">
+            <h4>Total Registration Requests</h4>
+            <p><?php echo $totalRegistrationRequests; ?></p>
         </div>
 
     </div>
