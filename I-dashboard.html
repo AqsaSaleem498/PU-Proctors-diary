@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Invigilator Dashboard</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+   <div class="navbar">
+    <span class="logo">Proctors Diary</span>
+    <a href="I-My duties.html">My Duties</a>
+    <a href="I-leave request.html">Leave Request</a>
+    <a href="I-mark attendance.html">Mark Attendance</a>
+    <a href="I-payments.html">My Payment</a>
+    <span class="right">Logged in as invigilator | Logout</span>
+</div>
+    <h2>Invigilator Dashboard</h2>
+    <!----welcome box-->
+    <div  id="welcomebox" class="welcome">
+        <h2 id="welcometext"></h2>
+    </div>
+    <br>
+    <h4>Your Assigned Duties</h4>
+<br>
+    <table>
+        <thead>
+        <tr>
+            <th>Date</th>
+            <th>Shift</th>
+            <th>Center</th>
+            <th>Room No</th>
+            <th>Status</th>
+        </tr>
+        </thead>    
+   <tbody id="dutyTable">
+    <!-- JS se data ayega -->
+  </tbody>
+</table>
+<!--go on invi dashboard-->
+
+<script>// Ye data future me PHP + DB se aye ga
+
+ setTimeout(function(){
+document.getElementById("welcomeBox").style.display="none";
+},10000);
+// Name get karo
+let userName = sessionStorage.getItem("userName");
+
+// Check: fresh login ya nahi
+if (sessionStorage.getItem("showWelcome") !== "no") {
+  welcomeText.innerText = `Welcome ${userName}! 👋`;
+  sessionStorage.setItem("showWelcome", "no");
+} else {
+  welcomeBox.style.display = "none";
+} // Ye data future me PHP + DB se aye ga
+let assignedDuties = [
+  {
+    invigilatorId: 2,
+    center: "PU Exam Center A",
+    date: "10-Apr-2025",
+    shift: "Morning",
+    room: "Room 12",
+    status: "Assigned"
+  },
+  {
+    invigilatorId: 3,
+    center: "PU Exam Center B",
+    date: "12-Apr-2025",
+    shift: "Evening",
+    room: "Room 5",
+    status: "Assigned"
+  }
+];
+
+// Assume logged-in invigilator
+let loggedInInvigilatorId = 2;
+
+let table = document.getElementById("dutyTable");
+
+assignedDuties.forEach(duty => {
+
+  // ❗ Sirf us invigilator ki duties show ho
+  if (duty.invigilatorId === loggedInInvigilatorId) {
+
+    let row = `
+      <tr>
+        <td>${duty.center}</td>
+        <td>${duty.date}</td>
+        <td>${duty.shift}</td>
+        <td>${duty.room}</td>
+        <td>${duty.status}</td>
+      </tr>
+    `;
+
+    table.innerHTML += row;
+  }
+}); 
+console.log("Invigilator panel loaded");
+</script>
+</body>
+</html>
