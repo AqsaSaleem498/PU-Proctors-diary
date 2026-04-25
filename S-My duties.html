@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>My Duties</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="navbar">
+        <span class="logo">Proctors Diary</span>
+        <a class="active" href="S-My duties.html">My Duties</a>
+        <a href="S-leave request.html">Leave Request</a>
+        <a href="S-Mark attendance.html">Mark Attendance</a>
+        <a href="S-My payments.html">My Payment</a>
+        <a href="S-Upload Reports.html">Upload Reports</a>
+        <span class="right">Logged in as Superintendent | Logout</span>
+    </div>
+    <h2>Superitendent - My Duties</h2>
+    <br>
+    <div class="filter-box">
+        <label><b>Filter by Status:</b></label>
+        <select>
+            <option>All</option>
+            <option>Assigned</option>
+            <option>Completed</option>
+        </select>
+    </div>
+
+    <div class="card">
+        <h3>Duties List</h3>
+
+        <table id="dutyTable">
+            <tr>
+                <th>#</th>
+                <th>Exam Date</th>
+                <th>Shift</th>
+                <th>Center</th>
+                <th>Status</th>
+            </tr>
+            <tr id="noData">
+                <td colspan="5" style="text-align:center;">
+                    No duties assigned yet.
+                </td>
+            </tr>
+        </table>
+    </div>
+
+    </div>
+
+
+    <script>
+        // ===== Dummy backend simulation =====
+        let dutyAssigned = false; // jab backend se duty milegi yeh true hoga
+
+        if (dutyAssigned) {
+            document.getElementById("noData").style.display = "none";
+
+            let table = document.getElementById("dutyTable");
+
+            table.innerHTML += `
+    <tr>
+        <td>1</td>
+        <td>2025-08-27</td>
+        <td>Morning</td>
+        <td>Ravi Road – ravi road lahore</td>
+        <td><span class="status">Assigned</span></td>
+    </tr>`;
+        }
+    </script>
+
+</body>
+
+</html>
