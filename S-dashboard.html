@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Superintendent Dashboard</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="navbar">
+    <span class="logo">Proctors Diary</span>
+    <a href="S-My duties.html">My Duties</a>
+    <a href="S-leave request.html">Leave Request</a>
+    <a href="S-Mark attendance.html">Mark Attendance</a>
+    <a href="S-My payments.html">My Payment</a>    
+    <a href="S-Upload Reports.html">Upload Reports</a>    
+    <span class="right">Logged in as Superintendent| Logout</span>
+</div>
+    <h2>Superintendent Dashboard</h2>
+    <!----welcome box-->
+    <div  id="welcomebox" class="welcome">
+        <h2 id="welcometext"></h2>
+    </div>
+    <div class="card">
+    <br>
+    <h4 >Your Assigned Duties</h4>
+    <br>
+
+    <table>
+        <thead>
+        <tr>
+            <th>Date</th>
+            <th>Shift</th>
+            <th>Center</th>
+            <th>Room No</th>
+            <th>Status</th>
+        </tr>
+    </thead>    
+   <tbody id="dutyTable">
+    <!-- JS se data ayega -->
+  </tbody>
+</table>
+ </div>
+<script>// Ye data future me PHP + DB se aye ga
+
+ setTimeout(function(){
+document.getElementById("welcomeBox").style.display="none";
+},10000);
+// Name get karo
+let userName = sessionStorage.getItem("userName");
+
+// Check: fresh login ya nahi
+if (sessionStorage.getItem("showWelcome") !== "no") {
+  welcomeText.innerText = `Welcome ${userName}! 👋`;
+  sessionStorage.setItem("showWelcome", "no");
+} else {
+  welcomeBox.style.display = "none";
+} // Ye data future me PHP + DB se aye ga
+let assignedDuties = [
+  {
+    SuperintendentId: 2,
+    center: "PU Exam Center A",
+    date: "10-Apr-2025",
+    shift: "Morning",
+    room: "Room 12",
+    status: "Assigned"
+  },
+  {
+    SuperintendentId: 3,
+    center: "PU Exam Center B",
+    date: "12-Apr-2025",
+    shift: "Evening",
+    room: "Room 5",
+    status: "Assigned"
+  }
+];
+
+// Assume logged-in invigilator
+let loggedSuperintendentId = 2;
+
+let table = document.getElementById("dutyTable");
+
+assignedDuties.forEach(duty => {
+
+  // ❗ Sirf us invigilator ki duties show ho
+  if (duty.SuperintendentId === loggedInSuperintendentId) {
+
+    let row = `
+      <tr>
+        <td>${duty.center}</td>
+        <td>${duty.date}</td>
+        <td>${duty.shift}</td>
+        <td>${duty.room}</td>
+        <td>${duty.status}</td>
+      </tr>
+    `;
+
+    table.innerHTML += row;
+  }
+}); 
+console.log("Superintendent panel loaded");
+</script>
+</body>
+</html>
