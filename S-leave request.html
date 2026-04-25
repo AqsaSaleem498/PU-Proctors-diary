@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Leave Request</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+</head>
+
+<body>
+    <div class="navbar">
+        <span class="logo">Proctors Diary</span>
+        <a href="S-My duties.html">My Duties</a>
+        <a class="active" href="S-leave request.html">Leave Request</a>
+        <a href="S-Mark attendance.html">Mark Attendance</a>
+        <a href="S-My payments.html">My Payment</a>
+        <a href="S-Upload Reports.html">Upload Reports</a>
+        <span class="right">Logged in as Superintendent| Logout</span>
+    </div>
+
+        <h2>Leave Request</h2>
+
+        <div class="card">
+            <h3>Submit New Request</h3>
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label>Start Date</label>
+                    <input type="date">
+                </div>
+
+                <div class="form-group">
+                    <label>End Date</label>
+                    <input type="date">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label>Reason</label>
+                <textarea></textarea>
+            </div>
+
+            <button class="btn" onclick="submitRequest()">Submit Request</button>
+            <div style="clear: both;"></div>
+        </div>
+
+        <div class="card">
+            <h3>Your Leave History</h3>
+
+            <table>
+                <tr>
+                    <th>#</th>
+                    <th>Reason</th>
+                    <th>From</th>
+                    <th>To</th>
+                    <th>Status</th>
+                </tr>
+                <tr>
+                    <td colspan="5">No leave requests found.</td>
+                </tr>
+            </table>
+        </div>
+
+    </div>
+
+    <script>
+        function submitRequest() {
+            alert("UI only — backend baad mein lagega");
+        }
+    </script>
+
+</body>
+
+</html>
