@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Mark Attendance</title>
+ <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="navbar">
+    <span class="logo">Proctors Diary</span>
+    <a href="I-My duties.html">My Duties</a>
+    <a href="I-leave request.html">Leave Request</a>
+    <a class="active" href="I-mark attendance.html">Mark Attendance</a>
+    <a href="I-payments.html">My Payment</a>
+    <span class="right">Logged in as invigilator | Logout</span>
+</div>
+
+<h2>Mark Attendance</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th>Center</th>
+      <th>Date</th>
+      <th>Shift</th>
+      <th>Room</th>
+      <th>Attendance</th>
+      <th>Action</th>
+    </tr>
+  </thead>
+
+  <tbody id="attendanceTable">
+    <!-- JS se rows ayengi -->
+  </tbody>
+</table>
+
+<!-- Camera Modal -->
+<div id="cameraBox" class="camera-box">
+  <video id="video" autoplay></video>
+  <canvas id="canvas"></canvas>
+
+  <div class="camera-buttons">
+    <button onclick="captureImage()">Capture</button>
+    <button onclick="closeCamera()">Close</button>
+  </div>
+</div>
+
+<script>// Admin assigned duties (future DB se ayega)
+
+let duties = [
+  {
+    id: 1,
+    invigilatorId: 2,
+    center: "PU Center A",
+    date: "15-Apr-2025",
+    shift: "Morning",
+    room: "Room 10"
+  }
+];
+
+// Logged in invigilator
+let loggedInInvigilatorId = 2;
+
+let table = document.getElementById("attendanceTable");
+
+duties.forEach((duty, index) => {
+  if (duty.invigilatorId === loggedInInvigilatorId) {
+
+    table.innerHTML += `
+      <tr>
+        <td>${duty.center}</td>
+        <td>${duty.date}</td>
+        <td>${duty.shift}</td>
+        <td>${duty.room}</td>
+        <td>
+          <select id="status-${index}">
+            <option value="">Select</option>
+            <option value="Present">Present</option>
+            <option value="Absent">Absent</option>
+            <option value="Late">Late</option>
+          </select>
+        </td>
+        <td>
+          <button class="add-btn" onclick="markNow(${index})">Mark Now</button>
+        </td>
+      </tr>
+    `;
+  }
+});
+
+let currentdutyIndex = null;
+let stream = null;
+
+function markNow(index) {
+  let status = document.getElementById(`status-${index}`).value;
+
+  if (status === "") {
+    alert("Please select attendance first");
+    return;
+  }
+
+  currentDutyIndex = index;
+  openCamera();
+}
+
+function openCamera() {
+  document.getElementById("cameraBox").style.display = "block";
+
+  navigator.mediaDevices.getUserMedia({ video: true })
+    .then(mediaStream => {
+      stream = mediaStream;
+      document.getElementById("video").srcObject = mediaStream;
+    })
+    .catch(() => alert("Camera access denied"));
+}
+
+function captureImage() {
+  let video = document.getElementById("video");
+  let canvas = document.getElementById("canvas");
+
+  canvas.width = video.videoWidth;
+  canvas.height = video.videoHeight;
+
+  canvas.getContext("2d").drawImage(video, 0, 0);
+
+  let imageData = canvas.toDataURL("image/png");
+
+  // Attendance save (frontend demo)
+  duties[currentDutyIndex].attendance =
+    document.getElementById(`status-${currentDutyIndex}`).value;
+  duties[currentDutyIndex].image = imageData;
+
+  alert("Attendance marked successfully!");
+
+  closeCamera();
+}
+
+function closeCamera() {
+  document.getElementById("cameraBox").style.display = "none";
+
+  if (stream) {
+    stream.getTracks().forEach(track => track.stop());
+  }
+}</script>
+</body>
+</html>
