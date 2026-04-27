@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Payment Status</title>
+<link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="navbar">
+    <span class="logo">Proctors Diary</span>
+    <a href="S-My duties.html">My Duties</a>
+    <a href="S-leave request.html">Leave Request</a>
+    <a href="S-Mark attendance.html">Mark Attendance</a>
+    <a class="active" href="S-My payments.html">My Payment</a>    
+    <a href="S-Upload Reports.html">Upload Reports</a>    
+    <span class="right">Logged in as Superintendent | Logout</span>
+    </div>
+<h2>Payment Status</h2>
+
+<div class="container">
+    <table>
+        <th>
+            <tr>
+                <th>#</th>
+                <th>Role</th>
+                <th>Completed Duties</th>
+                <th>Per Duty Amount</th>
+                <th>Total Payment</th>
+                <th>Status</th>
+                <th>Payment Date</th>
+            </tr>
+        </th>
+        <tbody id="paymentTable">
+        </tbody>
+    </table>
+</div>
+
+<script>
+    // Fixed payment per duty
+    let perDutyAmount = 2000;
+
+    // Today date function
+    function getTodayDate() {
+        let today = new Date();
+        return today.toISOString().split("T")[0]; // YYYY-MM-DD
+    }
+
+    // Payment records
+    let paymentRecords = [
+        { role: "Superintendent", duties: 3, status: "Paid" },
+        { role: "Invigilator", duties: 2, status: "Pending" }
+    ];
+
+    let table = document.getElementById("paymentTable");
+
+    paymentRecords.forEach((person, index) => {
+
+        let totalPayment = person.duties * perDutyAmount;
+
+        let paymentDate =
+            person.status === "Paid" ? getTodayDate() : "-";
+
+        let row = document.createElement("tr");
+
+        row.innerHTML = `
+            <td>${index + 1}</td>
+            <td>${person.role}</td>
+            <td>${person.duties}</td>
+            <td>${perDutyAmount}</td>
+            <td><b>${totalPayment}</b></td>
+            <td>
+                <span class="${person.status === 'Paid' ? 'paid' : 'pending'}">
+                    ${person.status}
+                </span>
+            </td>
+            <td>${paymentDate}</td>
+        `;
+
+        table.appendChild(row);
+    });
+</script>
+
+</body>
+</html>
