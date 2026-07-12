@@ -18,6 +18,21 @@ window.location='A-manage duties.php';
 </script>";
 exit();
 }
+if(isset($_POST['update_time'])){
+$shift=$_POST['shift'];
+$start=$_POST['start_time'];
+$end=$_POST['end_time'];
+mysqli_query($conn,
+"UPDATE shift_timings
+SET start_time='$start',
+end_time='$end'
+WHERE shift_name='$shift'");
+echo "<script>
+alert('Shift Timing Updated');
+window.location='A-manage duties.php';
+</script>";
+exit();
+}
 /* ASSIGN DUTY */
 if(isset($_POST['assign'])){
 $user_id=$_POST['user_id'];
@@ -60,6 +75,11 @@ alert('Duty Assigned Successfully');
 window.location='A-manage duties.php';
 </script>";
 }
+$morning=mysqli_fetch_assoc(mysqli_query($conn,
+"SELECT * FROM shift_timings WHERE shift_name='Morning'"));
+
+$evening=mysqli_fetch_assoc(mysqli_query($conn,
+"SELECT * FROM shift_timings WHERE shift_name='Evening'"));
 /* USERS LIST */
 $users=mysqli_query($conn,
 "SELECT * FROM users
@@ -112,10 +132,14 @@ while($user=mysqli_fetch_assoc($users)){
 <?php } ?>
 </select>
 <input type="date" name="duty_date" required>
-<select name="shift">
-<option>Morning</option>
-<option>Evening</option>
+<select name="shift" id="shift" onchange="showTiming()">
+<option value="Morning">Morning</option>
+<option value="Evening">Evening</option>
 </select>
+<input type="time" id="start_time" name="start_time" value="<?
+php echo $morning['start_time']; ?>">
+<input type="time" id="end_time" name="end_time" value="<?php echo $morning['end_time']; ?>">
+<button type="submit" name="update_time">Update Time</button>
 <input type="text" name="center" placeholder="Center" required>
 <input type="text" name="department" placeholder="Department"
 required>
@@ -176,6 +200,26 @@ while($row=mysqli_fetch_assoc($stats)){
 </tr>
 <?php } ?>
 </table>
-<script src="Javascript.js"></script>
+<script src="Javascript.js">
+function showTiming(){
+let shift=document.getElementById("shift").value;
+if(shift=="Morning"){
+document.getElementById("start_time").value="<?php echo $morning['start_time']; ?>";
+document.getElementById("end_time").value="<?php echo $morning['end_time']; ?>";
+}else{
+document.getElementById("start_time").value="<?php echo $evening['start_time']; ?>";
+document.getElementById("end_time").value="<?php echo $evening['end_time']; ?>";
+}function showTiming(){
+let shift=document.getElementById("shift").value;
+if(shift=="Morning"){
+document.getElementById("start_time").value="<?php echo $morning['start_time']; ?>";
+document.getElementById("end_time").value="<?php echo $morning['end_time']; ?>";
+}else{
+document.getElementById("start_time").value="<?php echo $evening['start_time']; ?>";
+document.getElementById("end_time").value="<?php echo $evening['end_time']; ?>";
+  }
+ }
+}
+</script>
 </body>
 </html>
