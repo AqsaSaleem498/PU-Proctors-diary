@@ -24,12 +24,20 @@ AND status='Assigned'");
 <th>Center</th>
 <th>Date</th>
 <th>Shift</th>
+<th>Status</th>
 <th>Attendance</th>
 <th>Selfie</th>
 <th>Action</th>
 </tr>
 <?php
 while($row=mysqli_fetch_assoc($result)){
+$attendance=mysqli_fetch_assoc(
+mysqli_query($conn,
+"SELECT attendance_status
+FROM attendance
+WHERE duty_id='".$row['id']."'
+LIMIT 1")
+);
 ?>
 <tr>
 <td>
@@ -40,6 +48,16 @@ while($row=mysqli_fetch_assoc($result)){
 </td>
 <td>
 <?php echo $row['shift']; ?>
+</td>
+<td>
+<?php
+if($attendance){
+echo $attendance['attendance_status'];
+}
+else{
+echo "Pending";
+}
+?>
 </td>
 <td>
 <select
@@ -63,8 +81,19 @@ onchange="attendanceCheck()">
 </div>
 </td>
 <td>
-<input type="hidden" name="duty_id" value="<?php echo $row['id']; ?>">
+<?php
+if($attendance){
+echo "<span style='color:blue;font-weight:bold;'>
+Already Marked
+</span>";
+}
+else{
+?>
+<input type="hidden"name="duty_id"value="<?php echo $row['id']; ?>">
 <button type="submit">Mark Now</button>
+<?php
+}
+?>
 </td>
 </tr>
 <?php } ?>
