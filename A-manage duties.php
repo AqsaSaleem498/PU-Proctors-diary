@@ -1,7 +1,7 @@
 <?php
 session_start();
 include "db.php";
-include "Mail-Send.php";
+include "Mail-send.php";
 if($_SESSION['role']!="admin"){
 header("Location:Login.php");
 exit();
@@ -68,7 +68,6 @@ $user['email'],
 A new duty has been assigned to you.
 Please login to PU Proctors Diary and check My Duties.
 Thank You"
-/* ALERT */
 );
 echo "<script>
 alert('Duty Assigned Successfully');
@@ -77,7 +76,6 @@ window.location='A-manage duties.php';
 }
 $morning=mysqli_fetch_assoc(mysqli_query($conn,
 "SELECT * FROM shift_timings WHERE shift_name='Morning'"));
-
 $evening=mysqli_fetch_assoc(mysqli_query($conn,
 "SELECT * FROM shift_timings WHERE shift_name='Evening'"));
 /* USERS LIST */
@@ -115,7 +113,25 @@ GROUP BY center,department");
 <body>
 <?php include "navbar.php"; ?>
 <h1>Manage Duties</h1>
+<form method="POST">
+<h2>Update Shift Timings</h2>
+<label>Shift</label>
+<select name="shift" id="shift" onchange="showTiming()" required>
+<option value="Morning">Morning</option>
+<option value="Evening">Evening</option>
+</select>
+<br>
+<label>Start Time</label>
+<input type="time"id="start_time"name="start_time"
+value="<?php echo $morning['start_time']; ?>">
+<br>
+<label>End Time</label>
+<input type="time"id="end_time"name="end_time"
+value="<?php echo $morning['end_time']; ?>">
+<button type="submit"name="update_time">Update Time</button>
+</form>
 <form method="POST" onsubmit="return validateDuty()">
+<h2>Assign Duty</h2>
 <select name="role" required>
 <option value="">Select Role</option>
 <option value="invigilator">Invigilator</option>
@@ -132,14 +148,10 @@ while($user=mysqli_fetch_assoc($users)){
 <?php } ?>
 </select>
 <input type="date" name="duty_date" required>
-<select name="shift" id="shift" onchange="showTiming()">
-<option value="Morning">Morning</option>
-<option value="Evening">Evening</option>
+<select name="shift">
+<option>Morning</option>
+<option>Evening</option>
 </select>
-<input type="time" id="start_time" name="start_time" value="<?
-php echo $morning['start_time']; ?>">
-<input type="time" id="end_time" name="end_time" value="<?php echo $morning['end_time']; ?>">
-<button type="submit" name="update_time">Update Time</button>
 <input type="text" name="center" placeholder="Center" required>
 <input type="text" name="department" placeholder="Department"
 required>
@@ -201,25 +213,6 @@ while($row=mysqli_fetch_assoc($stats)){
 <?php } ?>
 </table>
 <script src="Javascript.js">
-function showTiming(){
-let shift=document.getElementById("shift").value;
-if(shift=="Morning"){
-document.getElementById("start_time").value="<?php echo $morning['start_time']; ?>";
-document.getElementById("end_time").value="<?php echo $morning['end_time']; ?>";
-}else{
-document.getElementById("start_time").value="<?php echo $evening['start_time']; ?>";
-document.getElementById("end_time").value="<?php echo $evening['end_time']; ?>";
-}function showTiming(){
-let shift=document.getElementById("shift").value;
-if(shift=="Morning"){
-document.getElementById("start_time").value="<?php echo $morning['start_time']; ?>";
-document.getElementById("end_time").value="<?php echo $morning['end_time']; ?>";
-}else{
-document.getElementById("start_time").value="<?php echo $evening['start_time']; ?>";
-document.getElementById("end_time").value="<?php echo $evening['end_time']; ?>";
-  }
- }
-}
 </script>
 </body>
 </html>
